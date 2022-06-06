@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esNext",
+    "lib": ["esnext", "dom"],
+    "checkJs": false,
+    "allowJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "types": ["node"],
+    "baseUrl": "./src",
+    "paths": { "*": ["*", ".npm/package/node_modules/*"] },
+    "typeRoots": [
+      "./.npm/package/node_modules/@types",
+      "./src/definitions"
+    ]
+  },
+  "exclude": ["package.js"]
+}

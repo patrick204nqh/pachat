@@ -1,0 +1,98 @@
+version: "3.9"
+
+
+x-default: &default
+  env_file: .env
+  networks:
+    - dockernet
+
+
+services:
+  meteor:
+    <<: *default
+    image: patrick204nqh/pachat:latest
+    container_name: pachat-meteor
+    build: .
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      MONGO_URL: "mongodb://${DB_USER}:${DB_PASSWORD}@mongo:${DB_PORT}"
+      MAIL_URL: "smtp://mailhog:1025"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    <<: *default
+    image: mongo:5.0.9
+    container_name: pachat-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - data_mongo:/data/db
+    networks:
+      - dockernet
+      - dbnet
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: pachat-mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: mongo
+    networks:
+      - dbnet
+    depends_on:
+      - mongo
+
+  redis:
+    <<: *default
+    image: redis:7
+    container_name: pachat-redis
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    networks:
+      - dockernet
+      - dbnet
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: pachat-redis-commander
+    environment:
+      REDIS_HOSTS: "local:redis:${REDIS_PORT}"
+    healthcheck:
+        disable: true
+    ports:
+      - 8082:8081
+    networks:
+      - dbnet
+    depends_on:
+      - redis
+
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: pachat-mailhog
+    ports:
+      - 8025:8025
+      - 1025:1025
+
+
+volumes:
+  data_mongo: {}
+
+
+networks:
+  dockernet:
+    driver: bridge
+  dbnet:
+    driver: bridge
