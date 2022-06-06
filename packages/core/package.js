@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'patrick204nqh:core',
+  name: 'pachat:core',
   version: '0.0.1',
   summary: '',
   git: '',

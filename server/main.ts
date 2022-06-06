@@ -1,4 +1,4 @@
-import Core from 'meteor/patrick204nqh:core';
+import Core from 'meteor/pachat:core';
 
-var core = new Core();
+const core = new Core();
 core.bootstrap();
