@@ -1,7 +1,5 @@
-declare module Pachat {
-  interface Core {
+declare module "meteor/pachat:core" {
+  export class Core {
     bootstrap(): void;
   }
 }
-
-interface Core extends Pachat.Core {}

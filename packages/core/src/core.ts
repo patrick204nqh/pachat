@@ -1,6 +1,6 @@
 import { loadRouter } from './routes';
 
-export default class Core {
+export class Core {
   bootstrap() {
     loadRouter();
   }

@@ -1,4 +1,4 @@
-import Core from 'meteor/pachat:core';
+import { Core as PachatCore } from 'meteor/pachat:core';
 
-const core = new Core();
+const core = new PachatCore();
 core.bootstrap();
