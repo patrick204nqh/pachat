@@ -29,14 +29,13 @@
     },
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "types": ["node", "mocha", "meteor"],
+    "types": ["node", "mocha", "meteor", "pachat"],
     "esModuleInterop": true,
     "preserveSymlinks": true,
 
     /* Type definitions */
     "typeRoots": [
-      "./node_modules/@types",
-      "./definitions"
+      "./node_modules/@types"
     ]
   },
   "exclude": [

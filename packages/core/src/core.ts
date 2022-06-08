@@ -1,6 +1,6 @@
 import { loadRouter } from './routes';
 
-export class Core {
+export class PachatCore {
   bootstrap() {
     loadRouter();
   }

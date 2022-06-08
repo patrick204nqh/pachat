@@ -1,5 +1,5 @@
 declare module "meteor/pachat:core" {
-  export class Core {
+  export class PachatCore {
     bootstrap(): void;
   }
 }

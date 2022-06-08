@@ -18,6 +18,7 @@
     "@types/mocha": "^8.2.3",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "@types/pachat": "file:./packages/definitions",
     "typescript": "^4.6.3"
   },
   "meteor": {
